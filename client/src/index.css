@@ -1,0 +1,201 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+* {
+	margin: 0;
+}
+body {
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	-webkit-print-color-adjust: exact !important;
+	print-color-adjust: exact !important;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+	font-family: "Rubik", sans-serif;
+}
+#root,
+#__next {
+	isolation: isolate;
+}
+
+.table-container {
+	margin: 1rem;
+}
+
+table {
+	border-collapse: collapse;
+	text-align: center;
+	vertical-align: middle;
+	font-family: "Rubik", sans-serif;
+	width: 100%;
+	margin-bottom: 2rem;
+	page-break-before: auto;
+	page-break-inside: avoid;
+}
+
+caption {
+	font-weight: bold;
+	font-size: 24px;
+	text-align: left;
+	color: #333;
+	text-align: left;
+	vertical-align: middle;
+}
+
+thead th {
+	width: 5%;
+}
+
+th,
+td {
+	padding: 4px;
+}
+
+thead {
+	background-color: #333;
+	color: white;
+	font-size: 0.875rem;
+	text-transform: uppercase;
+	letter-spacing: 2%;
+	display: table-header-group;
+}
+
+tbody tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+tbody tr:nth-child(even) {
+	background-color: rgb(205, 205, 205);
+}
+
+tbody .summary-row {
+	font-weight: bold;
+}
+
+.report-header {
+	margin-bottom: 1.3rem;
+}
+
+.report-title {
+	background-color: rgb(205, 205, 205);
+}
+
+.header-subtext {
+	display: flex;
+	gap: 1.75rem;
+	margin-bottom: 1.3rem;
+}
+
+.totals-section {
+	display: flex;
+	justify-content: space-around;
+}
+
+.totals-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.percentages-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.total-cell {
+	display: flex;
+	justify-content: space-between;
+	margin: 0.2rem;
+	padding: 0.5rem;
+	gap: 2rem;
+	border: solid 1px rgb(157, 157, 157);
+	border-radius: 5px;
+}
+
+.divider {
+	width: 100%;
+	height: 5px;
+	background-color: #333;
+	margin-bottom: 15px;
+}
+
+@media print {
+	@page {
+		size: portrait;
+		margin: 10px 10px 10px -10px;
+	}
+
+	@page :footer {
+		display: none;
+	}
+
+	@page :header {
+		display: none;
+	}
+
+	table,
+	thead {
+		font-size: 10px;
+	}
+
+	.header-subtext {
+		font-size: 12px;
+	}
+
+	.summary-row td {
+		background: #333;
+		color: #fff;
+	}
+
+	.totals-section {
+		display: flex;
+		justify-content: space-around;
+		font-size: 12px;
+	}
+
+	.totals-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+
+	.percentages-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.total-cell {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		margin: 0.25rem;
+		padding: 0.25rem;
+		gap: 2rem;
+		border: solid 1px rgb(157, 157, 157);
+		border-radius: 5px;
+	}
+}
