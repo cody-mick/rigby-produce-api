@@ -65,7 +65,7 @@ app.get("/api/docksides-by-date/:date", async (req, res) => {
 // Function to start the server and connect to the database
 const startServer = async () => {
 	try {
-		connectToDatabase(client);
+		connectToDatabase();
 		app.listen(port, () => {
 			console.log(`Server running on port ${port}`);
 		});
