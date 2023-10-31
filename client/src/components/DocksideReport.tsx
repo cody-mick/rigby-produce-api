@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Dockside from "../../types/Dockside";
 import { useParams } from "react-router-dom";
 import useQueryParams from "../hooks/useQueryParams";
+import convertToPercentage from "../utilities/convertToPercentage";
+import cellarGrandTotals from "../utilities/cellarGrandTotals";
 
 const DocksideReport = () => {
 	const [docksides, setDocksides] = useState<Dockside[]>([]);
@@ -30,42 +32,7 @@ const DocksideReport = () => {
 		samplesByDay[date].push(sample); // Push the object to the corresponding date array
 	});
 
-	const convertToPercentage = (num: number) => {
-		return (num * 100).toFixed(2);
-	};
-
-	function calculateGrandTotals(samples: Dockside[]): Record<string, number> {
-		const grandTotals: Record<string, number> = {
-			grossWeight: 0,
-			netWeight: 0,
-			tare: 0,
-			hollowHeart: 0,
-			process: 0,
-			green: 0,
-			fourToEightOz: 0,
-			overEightOz: 0,
-			ones: 0,
-		};
-
-		samples.forEach((sample) => {
-			grandTotals.grossWeight += sample.netCalcs.grossWeight;
-			grandTotals.netWeight += sample.netCalcs.netWeight;
-			grandTotals.tare += sample.netCalcs.dirt;
-			grandTotals.hollowHeart +=
-				sample.defects.hollowHeartUnderEightOz +
-				sample.defects.hollowHeartOverEightOz;
-			grandTotals.process += sample.netCalcs.process;
-			grandTotals.green += sample.netCalcs.green;
-			grandTotals.fourToEightOz += sample.netCalcs.fourToEightOz;
-			grandTotals.overEightOz += sample.netCalcs.overEightOz;
-			grandTotals.ones +=
-				sample.netCalcs.fourToEightOz + sample.netCalcs.overEightOz;
-		});
-
-		return grandTotals;
-	}
-
-	const summaryTotals = calculateGrandTotals(docksides);
+	const summaryTotals = cellarGrandTotals(docksides);
 
 	return (
 		<div className="table-container">
