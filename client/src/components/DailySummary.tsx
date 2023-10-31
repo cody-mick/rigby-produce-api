@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import convertToPercentage from "../utilities/convertToPercentage";
+import formatTimeString from "../utilities/formatTimeString";
+import docksideAverages from "../utilities/docksideAverages";
+import summaryByCellar from "../utilities/summaryByCellar";
+// import useFetch from "../hooks/useFetch";
 
 const DailySummary = () => {
 	const [docksides, setDocksides] = useState([]);
@@ -14,91 +19,9 @@ const DailySummary = () => {
 		fetchDocksides();
 	}, []);
 
-	const convertToPercentage = (num: number) => {
-		return (num * 100).toFixed(2);
-	};
+	const averages = docksideAverages(docksides);
 
-	const averages = docksides.reduce((acc: any, obj: any) => {
-		const cellar = obj.cellar;
-		if (!acc[cellar]) {
-			acc[cellar] = {
-				cellar: cellar,
-				counts: 0,
-				totalGrossWeight: 0,
-				totalNetWeight: 0,
-				defectCount: 0,
-				summaryCTN: 0,
-				summaryFourToEightOz: 0,
-				summaryGreen: 0,
-				summaryHH: 0,
-				summaryOnes: 0,
-				summaryProcess: 0,
-				summaryTare: 0,
-				totalFourToEightOz: 0,
-				totalOverEightOz: 0,
-			};
-		}
-
-		acc[cellar].counts++;
-		acc[cellar].variety = obj.variety;
-		acc[cellar].totalGrossWeight += obj.netCalcs.grossWeight;
-		acc[cellar].totalNetWeight += obj.netCalcs.netWeight;
-		acc[cellar].defectCount += obj.defectCount;
-		acc[cellar].summaryCTN +=
-			obj.netCalcs.overEightOz /
-			(obj.netCalcs.fourToEightOz + obj.netCalcs.overEightOz);
-		acc[cellar].summaryFourToEightOz += obj.netCalcs.fourToEightOz;
-		acc[cellar].summaryGreen += obj.netCalcs.green;
-		acc[cellar].summaryHH +=
-			obj.defects.hollowHeartOverEightOz +
-			obj.defects.hollowHeartUnderEightOz;
-		acc[cellar].summaryOnes +=
-			obj.netCalcs.fourToEightOz + obj.netCalcs.overEightOz;
-		acc[cellar].summaryProcess += obj.netCalcs.process + obj.netCalcs.green;
-		acc[cellar].summaryTare += obj.netCalcs.dirt;
-		acc[cellar].totalFourToEightOz += obj.netCalcs.fourToEightOz;
-		acc[cellar].totalOverEightOz += obj.netCalcs.overEightOz;
-
-		return acc;
-	}, {});
-
-	const summaryByCellar = Object.values(averages).map((cellar: any) => {
-		const counts = cellar.counts;
-		const totalNetWeight = cellar.totalNetWeight;
-		const totalGrossWeight = cellar.totalGrossWeight;
-		return {
-			cellar: cellar.cellar,
-			counts: counts,
-			variety: cellar.variety,
-			defectCount: cellar.defectCount / counts,
-			summaryCTN:
-				cellar.totalOverEightOz /
-				(cellar.totalFourToEightOz + cellar.totalOverEightOz),
-			summaryFourToEightOz:
-				cellar.totalFourToEightOz /
-				(cellar.totalFourToEightOz + cellar.totalOverEightOz),
-			summaryGreen: cellar.summaryGreen / totalNetWeight,
-			summaryHH: cellar.summaryHH / totalNetWeight,
-			summaryOnes: cellar.summaryOnes / totalNetWeight,
-			summaryProcess: cellar.summaryProcess / totalNetWeight,
-			summaryTare: cellar.summaryTare / totalGrossWeight,
-		};
-	});
-
-	const formatTimeString = (time: any) => {
-		const parts = time.split(":");
-		if (parts.length === 3) {
-			const hours = parts[0];
-			const minutes = parts[1];
-			const amPm = parts[2].split(" ")[1];
-			const formattedTime = `${hours}:${minutes} ${amPm}`;
-			return formattedTime;
-		} else {
-			return time;
-		}
-	};
-
-	console.log(docksides);
+	const cellarSummaries = summaryByCellar(averages);
 
 	return (
 		<div className="table-container">
@@ -110,7 +33,7 @@ const DailySummary = () => {
 				<p>Prepared By _____________________</p>
 				<p>Approved By _____________________</p>
 			</div>
-			{summaryByCellar.map((cellar: any) => (
+			{cellarSummaries.map((cellar: any) => (
 				<table>
 					<caption>{`${cellar.cellar} (${cellar.variety})`}</caption>
 					<thead>
