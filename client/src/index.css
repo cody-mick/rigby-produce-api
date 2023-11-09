@@ -147,7 +147,7 @@ tbody .summary-row {
 
 @media print {
 	@page {
-		size: portrait;
+		size: landscape;
 		margin: 10px 10px 10px -10px;
 	}
 

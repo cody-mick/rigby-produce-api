@@ -13,7 +13,7 @@ const DocksideReport = () => {
 	useEffect(() => {
 		async function fetchDocksides() {
 			await fetch(
-				`http://localhost:8080/api/docksides-by-cellar/${cellarId}`
+				`http://172.233.155.111:8080/api/docksides-by-cellar/${cellarId}`
 			)
 				.then((res) => res.json())
 				.then((data) => setDocksides(data));
