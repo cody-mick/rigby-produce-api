@@ -29,7 +29,7 @@ const DocksideReport = () => {
 		if (!samplesByDay[date]) {
 			samplesByDay[date] = []; // Create a new array for the date if it doesn't exist
 		}
-		samplesByDay[date].push(sample); // Push the object to the corresponding date array
+		samplesByDay[date].push(sample); // Push the object to the corresponding date array.
 	});
 
 	const summaryTotals = cellarGrandTotals(docksides);
