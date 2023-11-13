@@ -6,7 +6,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./routes/HomePage.tsx";
 import ErrorPage from "./routes/ErrorPage.tsx";
 import DocksideDailySummary from "./routes/DocksideDailySummary.tsx";
-import DocksideDailySummaryAlt from "./routes/DailySummaryAlt.tsx";
 import CellarReport from "./routes/CellarReport.tsx";
 
 const router = createBrowserRouter([
@@ -23,11 +22,6 @@ const router = createBrowserRouter([
 	{
 		path: "/cellar-report/:cellarId",
 		element: <CellarReport />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: "daily-summary-alt/:date",
-		element: <DocksideDailySummaryAlt />,
 		errorElement: <ErrorPage />,
 	},
 ]);
