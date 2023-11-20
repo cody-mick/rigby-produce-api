@@ -13,7 +13,7 @@ const DailySummary = () => {
 	useEffect(() => {
 		async function fetchDocksides() {
 			await fetch(
-				`http://172.233.155.111:3333/api/docksides-by-date/${date}`
+				`https://rp-api.codymick.dev/api/docksides-by-date/${date}`
 			)
 				.then((res) => res.json())
 				.then((data) => setDocksides(data));
