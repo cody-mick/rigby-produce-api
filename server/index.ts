@@ -6,7 +6,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 const uri = process.env.MONGODB_URI || "";
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3333;
 
 // Load environment variables
 config();
