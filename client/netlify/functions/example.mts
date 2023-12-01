@@ -1,9 +1,10 @@
 import { Context, Config } from "@netlify/functions";
 
 export default async (req: Request, context: Context) => {
-	return new Response(`Your IP is ${context.ip}`);
+	const { city, country } = context.params;
+	return new Response(`Travel guide for ${city} in ${country}!`);
 };
 
 export const config: Config = {
-	path: "/whatismyip",
+	path: "/travel/:city/:country",
 };
