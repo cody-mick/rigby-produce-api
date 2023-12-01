@@ -1,11 +1,5 @@
 import { Context, Config } from "@netlify/functions";
 
 export default async (req: Request, context: Context) => {
-	const { city, country } = context.params;
-
-	return new Response(`You're visiting ${city} in ${country}!`);
+	return new Response("Hello world!");
 };
-
-// export const config: Config = {
-// 	path: "/travel/:city/:country",
-// };
