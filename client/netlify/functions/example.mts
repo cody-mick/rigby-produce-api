@@ -6,6 +6,6 @@ export default async (req: Request, context: Context) => {
 	return new Response(`You're visiting ${city} in ${country}!`);
 };
 
-export const config: Config = {
-	path: "/travel/:city/:country",
-};
+// export const config: Config = {
+// 	path: "/travel/:city/:country",
+// };
