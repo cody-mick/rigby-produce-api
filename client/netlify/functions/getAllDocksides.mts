@@ -1,7 +1,9 @@
-import type { Context } from "@netlify/functions";
+import { Context, Config } from "@netlify/functions";
 
-const getAllDocksides = async (req: Request, context: Context) => {
-	return new Response("Hello world!");
+export default async (req: Request, context: Context) => {
+	return new Response(`Your IP is ${context.ip}`);
 };
 
-export default getAllDocksides;
+export const config: Config = {
+	path: "/whatismyip",
+};
