@@ -2,7 +2,8 @@ import { Context, Config } from "@netlify/functions";
 
 export default async (req: Request, context: Context) => {
 	const { city, country } = context.params;
-	return new Response(`Travel guide for ${city} in ${country}!`);
+
+	return new Response(`You're visiting ${city} in ${country}!`);
 };
 
 export const config: Config = {
