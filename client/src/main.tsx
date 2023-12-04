@@ -7,6 +7,7 @@ import HomePage from "./routes/HomePage.tsx";
 import ErrorPage from "./routes/ErrorPage.tsx";
 import DocksideDailySummary from "./routes/DocksideDailySummary.tsx";
 import CellarReport from "./routes/CellarReport.tsx";
+import TestingData from "./components/TestingData.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
 	{
 		path: "/cellar-report/:cellarId",
 		element: <CellarReport />,
+		errorElement: <ErrorPage />,
+	},
+	{
+		path: "/testing-data",
+		element: <TestingData />,
 		errorElement: <ErrorPage />,
 	},
 ]);
