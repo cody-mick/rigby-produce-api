@@ -13,7 +13,7 @@ const DocksideReport = () => {
 	useEffect(() => {
 		async function fetchDocksides() {
 			await fetch(
-				`http://172.233.155.111:3333/api/docksides-by-cellar/${cellarId}`
+				`/.netlify/functions/get-docksides-by-cellar?cellar=${cellarId}`
 			)
 				.then((res) => res.json())
 				.then((data) => setDocksides(data));
