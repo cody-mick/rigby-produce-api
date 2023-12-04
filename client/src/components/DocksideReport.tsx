@@ -9,19 +9,18 @@ const DocksideReport = () => {
 	const [docksides, setDocksides] = useState<Dockside[]>([]);
 	const { cellarId } = useParams();
 	let query = useQueryParams();
+	const reportDate = query.get("date") || new Date().getFullYear();
 
 	useEffect(() => {
 		async function fetchDocksides() {
 			await fetch(
-				`/.netlify/functions/get-docksides-by-cellar?cellar=${cellarId}`
+				`/.netlify/functions/get-docksides-by-cellar?cellar=${cellarId}&date=${reportDate}`
 			)
 				.then((res) => res.json())
 				.then((data) => setDocksides(data));
 		}
 		fetchDocksides();
 	}, []);
-
-	const reportDate = query.get("date") || new Date().getFullYear();
 
 	const samplesByDay: { [key: string]: Dockside[] } = {};
 	docksides.map((sample: any) => {
