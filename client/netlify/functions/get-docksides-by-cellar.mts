@@ -13,7 +13,7 @@ export default async (event, req: Request, context: Context) => {
 	const docksidesCollection = db.collection("docksides");
 	const docksides = await docksidesCollection
 		.find({
-			cellarId: cellarId,
+			cellarId: "23119",
 		})
 		.toArray();
 	return new Response(JSON.stringify(docksides));
