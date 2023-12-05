@@ -7,7 +7,7 @@ import cellarGrandTotals from "../utilities/cellarGrandTotals";
 
 const DocksideReport = () => {
 	const [docksides, setDocksides] = useState<Dockside[]>([]);
-	const { cellarId } = useParams();
+	// const { cellarId } = useParams();
 	let query = useQueryParams();
 	const reportDate = query.get("date") || new Date().getFullYear();
 
