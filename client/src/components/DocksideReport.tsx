@@ -7,13 +7,15 @@ import cellarGrandTotals from "../utilities/cellarGrandTotals";
 
 const DocksideReport = () => {
 	const [docksides, setDocksides] = useState<Dockside[]>([]);
-	// const { cellarId } = useParams();
+	const { cellarId } = useParams();
 	let query = useQueryParams();
 	const reportDate = query.get("date") || new Date().getFullYear();
 
 	useEffect(() => {
 		async function fetchDocksides() {
-			await fetch(`/.netlify/functions/get-docksides-by-cellar`)
+			await fetch(
+				`/.netlify/functions/get-docksides-by-cellar/${cellarId}`
+			)
 				.then((res) => res.json())
 				.then((data) => setDocksides(data));
 		}
