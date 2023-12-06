@@ -8,6 +8,7 @@ const clientPromise = mongoClient.connect();
 export default async (event, req: Request, context: Context) => {
 	const queryString = event.queryStringParameters || "00000";
 	const cellarId = queryString.cellarId;
+	console.log(cellarId);
 	const client = await clientPromise;
 	const db = client.db("rigby_produce_dev");
 	const docksidesCollection = db.collection("docksides");
