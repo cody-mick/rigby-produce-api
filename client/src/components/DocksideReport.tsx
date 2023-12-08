@@ -14,9 +14,7 @@ const DocksideReport = () => {
 	useEffect(() => {
 		async function fetchDocksides() {
 			console.log("inside useEffect");
-			await fetch(
-				`https://rp-utils.codymick.dev/api/docksides/by-cellar/${cellarId}`
-			)
+			await fetch(`/api/docksides/by-cellar/${cellarId}`)
 				.then((res) => res.json())
 				.then((data) => setDocksides(data));
 		}
