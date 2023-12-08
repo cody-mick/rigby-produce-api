@@ -14,7 +14,7 @@ const DocksideReport = () => {
 	useEffect(() => {
 		async function fetchDocksides() {
 			await fetch(
-				`/.netlify/functions/get-docksides-by-cellar/${cellarId}`
+				`https://rp-utils.codymick.dev/api/docksides/by-cellar/${cellarId}`
 			)
 				.then((res) => res.json())
 				.then((data) => setDocksides(data));
