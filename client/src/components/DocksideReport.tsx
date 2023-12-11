@@ -4,22 +4,37 @@ import { useParams } from "react-router-dom";
 import useQueryParams from "../hooks/useQueryParams";
 import convertToPercentage from "../utilities/convertToPercentage";
 import cellarGrandTotals from "../utilities/cellarGrandTotals";
+import { Box, CircularProgress, LinearProgress } from "@mui/material";
 
 const DocksideReport = () => {
 	const [docksides, setDocksides] = useState<Dockside[]>([]);
+	const [loading, setLoading] = useState(false);
 	const { cellarId } = useParams();
 	let query = useQueryParams();
 	const reportDate = query.get("date") || new Date().getFullYear();
 
+	// useEffect(() => {
+	// 	async function fetchDocksides() {
+	// 		setLoading(true);
+	// 		console.log(loading);
+	// 		console.log("inside useEffect");
+	// 		await fetch(`/api/docksides/by-cellar/${cellarId}`)
+	// 			.then((res) => res.json())
+	// 			.then((data) => setDocksides(data));
+	// 		setLoading(false);
+	// 	}
+	// 	fetchDocksides();
+	// 	console.log("DOCKSIDES: ", docksides);
+	// }, []);
+
 	useEffect(() => {
-		async function fetchDocksides() {
-			console.log("inside useEffect");
-			await fetch(`/api/docksides/by-cellar/${cellarId}`)
-				.then((res) => res.json())
-				.then((data) => setDocksides(data));
-		}
-		fetchDocksides();
-		console.log("DOCKSIDES: ", docksides);
+		setLoading(true);
+		fetch(`/api/docksides/by-cellar/${cellarId}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setDocksides(data);
+				setLoading(false);
+			});
 	}, []);
 
 	const samplesByDay: { [key: string]: Dockside[] } = {};
@@ -42,6 +57,11 @@ const DocksideReport = () => {
 			{/* Make this dynamic eventually. Either farm or warehouse */}
 			<p>{docksides[0]?.type}</p>
 			<div>
+				{loading ? (
+					<Box sx={{ width: "100%", padding: "5px" }}>
+						<LinearProgress />
+					</Box>
+				) : null}
 				{Object.keys(samplesByDay).map((date) => {
 					const arrayForDate = samplesByDay[date];
 					return (
