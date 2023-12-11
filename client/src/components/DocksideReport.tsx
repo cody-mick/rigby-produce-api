@@ -19,9 +19,8 @@ const DocksideReport = () => {
 				.then((data) => setDocksides(data));
 		}
 		fetchDocksides();
+		console.log("DOCKSIDES: ", docksides);
 	}, []);
-
-	console.log("DOCKSIDES: ", docksides);
 
 	const samplesByDay: { [key: string]: Dockside[] } = {};
 	docksides.map((sample: any) => {
