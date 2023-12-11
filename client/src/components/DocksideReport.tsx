@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import useQueryParams from "../hooks/useQueryParams";
 import convertToPercentage from "../utilities/convertToPercentage";
 import cellarGrandTotals from "../utilities/cellarGrandTotals";
-import { Box, CircularProgress, LinearProgress } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 
 const DocksideReport = () => {
 	const [docksides, setDocksides] = useState<Dockside[]>([]);
