@@ -1,6 +1,6 @@
 import Dockside from "../../types/Dockside";
 
-const cellarGrandTotals = (samples: Dockside[]) => {
+const grandTotals = (samples: Dockside[]) => {
 	const grandTotals: Record<string, number> = {
 		grossWeight: 0,
 		netWeight: 0,
@@ -31,4 +31,29 @@ const cellarGrandTotals = (samples: Dockside[]) => {
 	return grandTotals;
 };
 
-export default cellarGrandTotals;
+const cellarPercentages = (samples: Dockside[]) => {
+	const totals = grandTotals(samples);
+	const percentages: any = {
+		hollowHeart: { amount: 0, displayName: "% HH" },
+		process: { amount: 0, displayName: "% Process" },
+		green: { amount: 0, displayName: "% Green" },
+		fourToEightOz: { amount: 0, displayName: "% 4-8 oz" },
+		carton: { amount: 0, displayName: "% CTN" },
+		ones: { amount: 0, displayName: "% #1's" },
+	};
+
+	percentages.hollowHeart.amount = totals.hollowHeart / totals.netWeight;
+	percentages.process.amount =
+		(totals.process + totals.green) / totals.netWeight;
+	percentages.green.amount = totals.green / totals.netWeight;
+	percentages.fourToEightOz.amount =
+		totals.fourToEightOz / (totals.fourToEightOz + totals.overEightOz);
+	percentages.carton.amount =
+		totals.overEightOz / (totals.fourToEightOz + totals.overEightOz);
+	percentages.ones.amount =
+		(totals.fourToEightOz + totals.overEightOz) / totals.netWeight;
+
+	return percentages;
+};
+
+export default { grandTotals, cellarPercentages };

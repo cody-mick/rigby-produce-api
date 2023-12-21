@@ -46,7 +46,7 @@ const DocksideReport = () => {
 		samplesByDay[date].push(sample); // Push the object to the corresponding date array.
 	});
 
-	const summaryTotals = cellarGrandTotals(docksides);
+	const summaryTotals = cellarGrandTotals.grandTotals(docksides);
 
 	return (
 		<div className="table-container">
