@@ -22,7 +22,6 @@ import cellarReportHeadings from "../utilities/cellarReportHeadings";
 import convertToPercentage from "../utilities/convertToPercentage";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import camelToTitle from "../utilities/camelToTitle";
-import styled from "styled-components";
 
 const CellarReportMUI = () => {
 	const [docksides, setDocksides] = useState<Dockside[]>([]);
