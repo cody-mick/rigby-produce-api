@@ -5,6 +5,7 @@ import {
 	Table,
 	TableBody,
 	TableCell,
+	tableCellClasses,
 	TableContainer,
 	TableHead,
 	TableRow,
@@ -13,6 +14,7 @@ import {
 	CircularProgress,
 	CardContent,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import Dockside from "../../types/Dockside";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -39,6 +41,26 @@ const CellarReportMUI = () => {
 				setLoading(false);
 			});
 	}, []);
+
+	const StyledTableCell = styled(TableCell)(({ theme }) => ({
+		[`&.${tableCellClasses.head}`]: {
+			backgroundColor: theme.palette.common.black,
+			color: theme.palette.common.white,
+		},
+		[`&.${tableCellClasses.body}`]: {
+			fontSize: 14,
+		},
+	}));
+
+	const StyledTableRow = styled(TableRow)(() => ({
+		"&:nth-of-type(even)": {
+			backgroundColor: "#CDCDCD",
+		},
+		// hide last border
+		"&:last-child td, &:last-child th": {
+			border: 0,
+		},
+	}));
 
 	const samplesByDay: { [key: string]: Dockside[] } = {};
 	docksides.map((sample: any) => {
@@ -80,113 +102,115 @@ const CellarReportMUI = () => {
 									minWidth: 650,
 								}}>
 								<TableHead>
-									<TableRow>
-										<TableCell align="center" colSpan={2}>
+									<StyledTableRow>
+										<StyledTableCell
+											align="center"
+											colSpan={2}>
 											{date}
-										</TableCell>
-									</TableRow>
-									<TableRow>
+										</StyledTableCell>
+									</StyledTableRow>
+									<StyledTableRow>
 										{tableHeadings.map((heading) => (
-											<TableCell align="center">
+											<StyledTableCell align="center">
 												{heading}
-											</TableCell>
+											</StyledTableCell>
 										))}
-									</TableRow>
+									</StyledTableRow>
 								</TableHead>
 								<TableBody>
 									{arrayForDate.map((sample) => (
-										<TableRow
+										<StyledTableRow
 											key={sample.time}
 											sx={{
 												"&:last-child td, &:last-child th":
 													{ border: 0 },
 											}}>
-											<TableCell align="center">
+											<StyledTableCell align="center">
 												{sample.fieldNo}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.truckNo}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.tubeNo}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.sampleTemp}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.netCalcs.grossWeight}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.netCalcs.dirt.toFixed(
 													2
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.netCalcs.netWeight.toFixed(
 													2
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{(
 													sample.defects
 														.hollowHeartUnderEightOz +
 													sample.defects
 														.hollowHeartOverEightOz
 												).toFixed(2)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.netCalcs.process.toFixed(
 													2
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.netCalcs.green.toFixed(
 													2
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.netCalcs.fourToEightOz.toFixed(
 													2
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{sample.netCalcs.overEightOz.toFixed(
 													2
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{(
 													sample.netCalcs
 														.fourToEightOz +
 													sample.netCalcs.overEightOz
 												).toFixed(2)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{convertToPercentage(
 													sample.summaryProcess
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{convertToPercentage(
 													sample.summaryGreen
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{convertToPercentage(
 													sample.summaryFourToEightOz
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{convertToPercentage(
 													sample.summaryCTN
 												)}
-											</TableCell>
-											<TableCell align="center">
+											</StyledTableCell>
+											<StyledTableCell align="center">
 												{convertToPercentage(
 													sample.summaryOnes
 												)}
-											</TableCell>
-										</TableRow>
+											</StyledTableCell>
+										</StyledTableRow>
 									))}
 								</TableBody>
 							</Table>
