@@ -47,11 +47,7 @@ h6 {
 
 /*----------------------------------------------------*/
 
-/* .table-container {
-	margin: 1rem;
-} */
-
-/* table {
+table {
 	border-collapse: collapse;
 	text-align: center;
 	vertical-align: middle;
@@ -60,46 +56,42 @@ h6 {
 	margin-bottom: 2rem;
 	page-break-before: auto;
 	page-break-inside: avoid;
-} */
+}
 
-/* caption {
+caption {
 	font-weight: bold;
 	font-size: 24px;
 	text-align: left;
 	color: #333;
 	text-align: left;
 	vertical-align: middle;
-} */
+}
 
 /* thead th {
 	width: 5%;
-} */
+}
 
-/* th,
+th,
 td {
 	padding: 4px;
 } */
 
-/* thead {
+thead {
 	background-color: #333;
 	color: white;
 	font-size: 0.875rem;
 	text-transform: uppercase;
 	letter-spacing: 2%;
 	display: table-header-group;
-} */
+}
 
-/* tbody tr:nth-child(odd) {
+tbody tr:nth-child(odd) {
 	background-color: #fff;
-} */
+}
 
-/* tbody tr:nth-child(even) {
+tbody tr:nth-child(even) {
 	background-color: rgb(205, 205, 205);
-} */
-
-/* tbody .summary-row {
-	font-weight: bold;
-} */
+}
 
 .report-header {
 	margin-bottom: 1.3rem;
@@ -113,38 +105,6 @@ td {
 	display: flex;
 	gap: 1.75rem;
 	margin-bottom: 1.3rem;
-}
-
-/* .totals-section {
-	display: flex;
-	justify-content: space-around;
-} */
-
-/* .totals-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-} */
-
-/* .percentages-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-} */
-
-/* .total-cell {
-	display: flex;
-	justify-content: space-between;
-	margin: 0.2rem;
-	padding: 0.5rem;
-	gap: 2rem;
-	border: solid 1px rgb(157, 157, 157);
-	border-radius: 5px;
-} */
-
-.divider {
-	width: 100%;
-	height: 5px;
-	background-color: #333;
-	margin-bottom: 15px;
 }
 
 @media print {

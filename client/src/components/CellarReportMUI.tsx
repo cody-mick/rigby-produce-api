@@ -5,7 +5,6 @@ import {
 	Table,
 	TableBody,
 	TableCell,
-	tableCellClasses,
 	TableContainer,
 	TableHead,
 	TableRow,
@@ -14,7 +13,6 @@ import {
 	CircularProgress,
 	CardContent,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import Dockside from "../../types/Dockside";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -34,9 +32,7 @@ const CellarReportMUI = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		fetch(
-			`https://rp-utils.codymick.dev/api/docksides/by-cellar/${cellarId}`
-		)
+		fetch(`/api/docksides/by-cellar/${cellarId}`)
 			.then((res) => res.json())
 			.then((data) => {
 				setDocksides(data);
@@ -44,25 +40,25 @@ const CellarReportMUI = () => {
 			});
 	}, []);
 
-	const StyledTableCell = styled(TableCell)(({ theme }) => ({
-		[`&.${tableCellClasses.head}`]: {
-			backgroundColor: theme.palette.common.black,
-			color: theme.palette.common.white,
-		},
-		[`&.${tableCellClasses.body}`]: {
-			fontSize: 14,
-		},
-	}));
+	// const StyledTableCell = styled(TableCell)(({ theme }) => ({
+	// 	[`&.${tableCellClasses.head}`]: {
+	// 		backgroundColor: theme.palette.common.black,
+	// 		color: theme.palette.common.white,
+	// 	},
+	// 	[`&.${tableCellClasses.body}`]: {
+	// 		fontSize: 14,
+	// 	},
+	// }));
 
-	const StyledTableRow = styled(TableRow)(() => ({
-		"&:nth-of-type(even)": {
-			backgroundColor: "#CDCDCD",
-		},
-		// hide last border
-		"&:last-child td, &:last-child th": {
-			border: 0,
-		},
-	}));
+	// const StyledTableRow = styled(TableRow)(() => ({
+	// 	"&:nth-of-type(even)": {
+	// 		backgroundColor: "#CDCDCD",
+	// 	},
+	// 	// hide last border
+	// 	"&:last-child td, &:last-child th": {
+	// 		border: 0,
+	// 	},
+	// }));
 
 	const samplesByDay: { [key: string]: Dockside[] } = {};
 	docksides.map((sample: any) => {
@@ -81,7 +77,7 @@ const CellarReportMUI = () => {
 		<Box className="page-container" sx={{ padding: "10px" }}>
 			<h1 className="report-title">Rigby Produce Dockside Report</h1>
 			<h2>
-				{docksides[0]?.cellar} - {docksides[0]?.variety} - {reportDate}
+				{docksides[0]?.cellar} | {docksides[0]?.variety} | {reportDate}
 			</h2>
 			<p>{docksides[0]?.type}</p>
 			{loading && (
@@ -104,115 +100,118 @@ const CellarReportMUI = () => {
 									minWidth: 650,
 								}}>
 								<TableHead>
-									<StyledTableRow>
-										<StyledTableCell
+									<TableRow>
+										<TableCell
 											align="center"
-											colSpan={2}>
+											colSpan={2}
+											sx={{ color: "white" }}>
 											{date}
-										</StyledTableCell>
-									</StyledTableRow>
-									<StyledTableRow>
+										</TableCell>
+									</TableRow>
+									<TableRow>
 										{tableHeadings.map((heading) => (
-											<StyledTableCell align="center">
+											<TableCell
+												align="center"
+												sx={{ color: "white" }}>
 												{heading}
-											</StyledTableCell>
+											</TableCell>
 										))}
-									</StyledTableRow>
+									</TableRow>
 								</TableHead>
 								<TableBody>
 									{arrayForDate.map((sample) => (
-										<StyledTableRow
+										<TableRow
 											key={sample.time}
 											sx={{
 												"&:last-child td, &:last-child th":
 													{ border: 0 },
 											}}>
-											<StyledTableCell align="center">
+											<TableCell align="center">
 												{sample.fieldNo}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.truckNo}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.tubeNo}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.sampleTemp}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.netCalcs.grossWeight}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.netCalcs.dirt.toFixed(
 													2
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.netCalcs.netWeight.toFixed(
 													2
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{(
 													sample.defects
 														.hollowHeartUnderEightOz +
 													sample.defects
 														.hollowHeartOverEightOz
 												).toFixed(2)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.netCalcs.process.toFixed(
 													2
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.netCalcs.green.toFixed(
 													2
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.netCalcs.fourToEightOz.toFixed(
 													2
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{sample.netCalcs.overEightOz.toFixed(
 													2
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{(
 													sample.netCalcs
 														.fourToEightOz +
 													sample.netCalcs.overEightOz
 												).toFixed(2)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{convertToPercentage(
 													sample.summaryProcess
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{convertToPercentage(
 													sample.summaryGreen
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{convertToPercentage(
 													sample.summaryFourToEightOz
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{convertToPercentage(
 													sample.summaryCTN
 												)}
-											</StyledTableCell>
-											<StyledTableCell align="center">
+											</TableCell>
+											<TableCell align="center">
 												{convertToPercentage(
 													sample.summaryOnes
 												)}
-											</StyledTableCell>
-										</StyledTableRow>
+											</TableCell>
+										</TableRow>
 									))}
 								</TableBody>
 							</Table>
@@ -220,64 +219,59 @@ const CellarReportMUI = () => {
 					);
 				})}
 			</Box>
-			<Divider sx={{ marginTop: "15px", marginBottom: "10px" }} />
-			<Box sx={{ display: "flex", gap: "15px" }}>
-				<Grid container xs={6} spacing={2}>
-					{Object.keys(summaryTotals).map((category) => (
-						<Grid xs={4}>
-							<Card variant="outlined">
-								<CardContent
-									sx={{
-										display: "flex",
-										justifyContent: "space-between",
-										alignItems: "center",
-									}}>
-									<p>{camelToTitle(category)}</p>
-									{loading ? (
-										<CircularProgress size={20} />
-									) : (
-										<p>
-											{summaryTotals[category].toFixed(2)}
-										</p>
+			<Divider sx={{ marginTop: "15px", marginBottom: "10px" }}>
+				Summary
+			</Divider>
+			<Grid container spacing={2} sx={{ margin: "12px" }}>
+				{Object.keys(summaryTotals).map((category) => (
+					<Card
+						variant="outlined"
+						sx={{
+							minWidth: 250,
+							margin: "5px",
+						}}>
+						<CardContent
+							sx={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}>
+							<p>{camelToTitle(category)}</p>
+							{loading ? (
+								<CircularProgress size={20} />
+							) : (
+								<p>{summaryTotals[category].toFixed(2)}</p>
+							)}
+						</CardContent>
+					</Card>
+				))}
+			</Grid>
+			<Grid container spacing={2} sx={{ margin: "12px" }}>
+				{Object.keys(summaryPercentages).map((category) => (
+					<Card
+						variant="outlined"
+						sx={{ minWidth: 250, margin: "5px" }}>
+						<CardContent
+							sx={{
+								display: "flex",
+								justifyContent: "space-between",
+								alignItems: "center",
+							}}>
+							<p>{summaryPercentages[category].displayName} </p>
+							{loading ? (
+								<CircularProgress size={20} />
+							) : (
+								<p>
+									{convertToPercentage(
+										summaryPercentages[category].amount
 									)}
-								</CardContent>
-							</Card>
-						</Grid>
-					))}
-				</Grid>
-				<Grid container xs={6} spacing={2}>
-					{Object.keys(summaryPercentages).map((category) => (
-						<Grid xs={6}>
-							<Card variant="outlined">
-								<CardContent
-									sx={{
-										display: "flex",
-										justifyContent: "space-between",
-										alignItems: "center",
-									}}>
-									<p>
-										{
-											summaryPercentages[category]
-												.displayName
-										}
-									</p>
-									{loading ? (
-										<CircularProgress size={20} />
-									) : (
-										<p>
-											{convertToPercentage(
-												summaryPercentages[category]
-													.amount
-											)}
-											&nbsp; %
-										</p>
-									)}
-								</CardContent>
-							</Card>
-						</Grid>
-					))}
-				</Grid>
-			</Box>
+									&nbsp; %
+								</p>
+							)}
+						</CardContent>
+					</Card>
+				))}
+			</Grid>
 		</Box>
 	);
 };
