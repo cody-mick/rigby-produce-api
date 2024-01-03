@@ -15,7 +15,6 @@ export default async (req: Request, context: Context) => {
 			.find({
 				cellarId: cellarId,
 			})
-			.limit(15)
 			.toArray();
 		return new Response(JSON.stringify(docksides));
 	} catch (error) {
