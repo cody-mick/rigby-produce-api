@@ -54,8 +54,8 @@ table {
 	font-family: "Rubik", sans-serif;
 	width: 100%;
 	margin-bottom: 2rem;
-	page-break-before: auto;
-	page-break-inside: avoid;
+	page-break-before: avoid;
+	page-break-inside: auto;
 }
 
 caption {
@@ -69,20 +69,18 @@ caption {
 
 /* thead th {
 	width: 5%;
-}
+} */
 
-th,
+/* th,
 td {
 	padding: 4px;
 } */
 
 thead {
-	background-color: #333;
+	background-color: #3c3c3c;
 	color: white;
 	font-size: 0.875rem;
 	text-transform: uppercase;
-	letter-spacing: 2%;
-	display: table-header-group;
 }
 
 tbody tr:nth-child(odd) {
@@ -107,10 +105,15 @@ tbody tr:nth-child(even) {
 	margin-bottom: 1.3rem;
 }
 
+.table-date {
+	font-size: 1.25rem;
+	margin-left: 0.5rem;
+}
+
 @media print {
 	@page {
-		size: landscape;
-		margin: 10px 10px 10px -10px;
+		size: A4 landscape;
+		margin: 0;
 	}
 
 	@page :footer {
@@ -131,33 +134,7 @@ tbody tr:nth-child(even) {
 	}
 
 	.summary-row td {
-		background: #333;
+		background: #3c3c3c;
 		color: #fff;
-	}
-
-	.totals-section {
-		display: flex;
-		justify-content: space-around;
-		font-size: 12px;
-	}
-
-	.totals-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-	}
-
-	.percentages-grid {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-	}
-
-	.total-cell {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		margin: 0.25rem;
-		padding: 0.25rem;
-		gap: 2rem;
-		border: solid 1px rgb(157, 157, 157);
-		border-radius: 5px;
 	}
 }

@@ -40,26 +40,6 @@ const CellarReportMUI = () => {
 			});
 	}, []);
 
-	// const StyledTableCell = styled(TableCell)(({ theme }) => ({
-	// 	[`&.${tableCellClasses.head}`]: {
-	// 		backgroundColor: theme.palette.common.black,
-	// 		color: theme.palette.common.white,
-	// 	},
-	// 	[`&.${tableCellClasses.body}`]: {
-	// 		fontSize: 14,
-	// 	},
-	// }));
-
-	// const StyledTableRow = styled(TableRow)(() => ({
-	// 	"&:nth-of-type(even)": {
-	// 		backgroundColor: "#CDCDCD",
-	// 	},
-	// 	// hide last border
-	// 	"&:last-child td, &:last-child th": {
-	// 		border: 0,
-	// 	},
-	// }));
-
 	const samplesByDay: { [key: string]: Dockside[] } = {};
 	docksides.map((sample: any) => {
 		const date = sample.date.split("T")[0]; // Extract the date
@@ -95,19 +75,12 @@ const CellarReportMUI = () => {
 								marginTop: "10px",
 								marginBottom: "10px",
 							}}>
+							<p className="table-date">{date}</p>
 							<Table
 								sx={{
 									minWidth: 650,
 								}}>
 								<TableHead>
-									<TableRow>
-										<TableCell
-											align="center"
-											colSpan={2}
-											sx={{ color: "white" }}>
-											{date}
-										</TableCell>
-									</TableRow>
 									<TableRow>
 										{tableHeadings.map((heading) => (
 											<TableCell
@@ -219,9 +192,7 @@ const CellarReportMUI = () => {
 					);
 				})}
 			</Box>
-			<Divider sx={{ marginTop: "15px", marginBottom: "10px" }}>
-				Summary
-			</Divider>
+			<Divider />
 			<Grid container spacing={2} sx={{ margin: "12px" }}>
 				{Object.keys(summaryTotals).map((category) => (
 					<Card
