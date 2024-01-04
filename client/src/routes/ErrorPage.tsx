@@ -12,6 +12,7 @@ const ErrorPage = () => {
 				{/* @ts-ignore */}
 				<i>{error.statusText || error.message}</i>
 			</p>
+			<p>This is from React Router</p>
 		</div>
 	);
 };
