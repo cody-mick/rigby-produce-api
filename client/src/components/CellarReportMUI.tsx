@@ -33,9 +33,7 @@ const CellarReportMUI = () => {
 	useEffect(() => {
 		setLoading(true);
 		const fetchDocksides = async () => {
-			await fetch(
-				`https://rp-utils.codymick.dev/api/docksides/by-cellar/${cellarId}`
-			)
+			await fetch(`/api/docksides/by-cellar/${cellarId}`)
 				.then((res) => res.json())
 				.then((data) => {
 					setLoading(false);
