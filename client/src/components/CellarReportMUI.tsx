@@ -32,12 +32,22 @@ const CellarReportMUI = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		fetch(`/api/docksides/by-cellar/${cellarId}`)
-			.then((res) => res.json())
-			.then((data) => {
-				setDocksides(data);
-				setLoading(false);
-			});
+		const fetchDocksides = async () => {
+			await fetch(`/api/docksides/by-cellar/${cellarId}`)
+				.then((res) => res.json())
+				.then((data) => {
+					setLoading(false);
+					setDocksides(data);
+				});
+		};
+		fetchDocksides();
+
+		// fetch(`/api/docksides/by-cellar/${cellarId}`)
+		// 	.then((res) => res.json())
+		// 	.then((data) => {
+		// 		setDocksides(data);
+		// 		setLoading(false);
+		// 	});
 	}, []);
 
 	const samplesByDay: { [key: string]: Dockside[] } = {};
